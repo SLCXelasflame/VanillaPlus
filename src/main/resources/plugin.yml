@@ -1,0 +1,7 @@
+name: VanillaPlus
+version: '${project.version}'
+main: fr.xelasflame.vanillaplus.VanillaPlus
+api-version: '1.21'
+commands:
+  vp:
+    description: permet de voir le craft du plugin
