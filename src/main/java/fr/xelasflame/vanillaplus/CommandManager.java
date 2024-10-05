@@ -22,15 +22,11 @@ public class CommandManager implements CommandExecutor {
                     else if(strings[0].equalsIgnoreCase("gems")) {
                         player.sendMessage(ChatColor.BOLD + "Dans ces contrés, l'on peut acquérir des gems, vestiges du passé, elle octroient à leur détenteur d'inombrables pouvoirs.\n" +
                                 "Cependant, leur force est telle qu'il est necessaire de posseder un sac pour contenir et rediriger leur force.\n\n" +
-                                "Les pouvoirs des gems sont :\n" +
-                                "§9Mining tear§f : Haste III\n" +
-                                "§eSun's comet§f : Fire Resistance III\n" +
-                                "§bPegasus's Feather§f : Speed II\n" +
-                                "§7Spartan's Shield§f : Resistance II\n" +
-                                "§6Luffy's Straw Hat§f : Strength I\n" +
-                                "§3Atlantide's Gem§f : Water Breathing I\n" +
-                                "§aThe Mask§f : Jump Boost III\n" +
-                                "Si un de ces vestiges du passé vous interesse il vous faudra le" + ChatColor.RED + " Gems Bag.\n" +
+                                "Les pouvoirs des gems sont :\n");
+                        for(Gems gems : Gems.gems_list) {
+                            player.sendMessage(gems.toString());
+                        }
+                        player.sendMessage("Si un de ces vestiges du passé vous interesse il vous faudra le" + ChatColor.RED + " Gems Bag.\n" +
                                 ChatColor.WHITE + "Tous ces crafts sont disponibles dans le livre de recette de l'établie'");
                     }
 

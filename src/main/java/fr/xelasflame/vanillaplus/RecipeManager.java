@@ -124,7 +124,7 @@ public static void init(){
     }
 
     private  static void recipemining_tear(){
-        ShapedRecipe mining_tear = new ShapedRecipe(NamespacedKey.minecraft("mining_tear"), ItemManager.mining_tear);
+        ShapedRecipe mining_tear = new ShapedRecipe(NamespacedKey.minecraft("mining_tear"), ItemManager.mining_tear.getItem());
         mining_tear.shape("ABA", "CDC", "ABA");
         mining_tear.setIngredient('A', Material.IRON_PICKAXE);
         mining_tear.setIngredient('B', Material.GOLD_INGOT);
@@ -133,7 +133,7 @@ public static void init(){
         Bukkit.addRecipe(mining_tear);
     }
     private  static void recipesun_comet(){
-        ShapedRecipe sun_comet = new ShapedRecipe(NamespacedKey.minecraft("sun_comet"), ItemManager.sun_comet);
+        ShapedRecipe sun_comet = new ShapedRecipe(NamespacedKey.minecraft("sun_comet"), ItemManager.sun_comet.getItem());
         sun_comet.shape("ABA", "CDC", "ABA");
         sun_comet.setIngredient('A', Material.MAGMA_CREAM);
         sun_comet.setIngredient('B', Material.QUARTZ);
@@ -143,7 +143,7 @@ public static void init(){
     }
 
     private  static void recipepegasus_feather(){
-        ShapedRecipe pegasus_feather = new ShapedRecipe(NamespacedKey.minecraft("pegasus_feather"), ItemManager.pegasus_feather);
+        ShapedRecipe pegasus_feather = new ShapedRecipe(NamespacedKey.minecraft("pegasus_feather"), ItemManager.pegasus_feather.getItem());
         pegasus_feather.shape("ABA", "CDC", "ABA");
         pegasus_feather.setIngredient('A', Material.LEATHER);
         pegasus_feather.setIngredient('B', Material.FEATHER);
@@ -152,7 +152,7 @@ public static void init(){
         Bukkit.addRecipe(pegasus_feather);
     }
     private  static void recipespartan_shield(){
-        ShapedRecipe spartan_shield = new ShapedRecipe(NamespacedKey.minecraft("spartan_shield"), ItemManager.spartan_shield);
+        ShapedRecipe spartan_shield = new ShapedRecipe(NamespacedKey.minecraft("spartan_shield"), ItemManager.spartan_shield.getItem());
         spartan_shield.shape("ABA", "CDC", "ABA");
         spartan_shield.setIngredient('A', Material.IRON_INGOT);
         spartan_shield.setIngredient('B', Material.GOLD_INGOT);
@@ -161,7 +161,7 @@ public static void init(){
         Bukkit.addRecipe(spartan_shield);
     }
     private  static void recipeatlantide_gem(){
-        ShapedRecipe atlantide_gem = new ShapedRecipe(NamespacedKey.minecraft("atlantide_gem"), ItemManager.atlantide_gem);
+        ShapedRecipe atlantide_gem = new ShapedRecipe(NamespacedKey.minecraft("atlantide_gem"), ItemManager.atlantide_gem.getItem());
         atlantide_gem.shape("ABA", "CDC", "ABA");
         atlantide_gem.setIngredient('A', Material.SALMON);
         atlantide_gem.setIngredient('B', Material.COD);
@@ -171,7 +171,7 @@ public static void init(){
     }
 
     private  static void recipeluffy_strawhat(){
-        ShapedRecipe luffy_strawhat = new ShapedRecipe(NamespacedKey.minecraft("luffy_strawhat"), ItemManager.luffy_strawhat);
+        ShapedRecipe luffy_strawhat = new ShapedRecipe(NamespacedKey.minecraft("luffy_strawhat"), ItemManager.luffy_strawhat.getItem());
         luffy_strawhat.shape("ABA", "CDC", "ABA");
         luffy_strawhat.setIngredient('A', Material.WHEAT);
         luffy_strawhat.setIngredient('B', Material.GOLD_INGOT);
@@ -181,7 +181,7 @@ public static void init(){
     }
 
     private  static void recipethe_mask(){
-        ShapedRecipe the_mask = new ShapedRecipe(NamespacedKey.minecraft("the_mask"), ItemManager.the_mask);
+        ShapedRecipe the_mask = new ShapedRecipe(NamespacedKey.minecraft("the_mask"), ItemManager.the_mask.getItem());
         the_mask.shape("ABA", "CDC", "ABA");
         the_mask.setIngredient('A', Material.ROTTEN_FLESH);
         the_mask.setIngredient('B', Material.KELP);
