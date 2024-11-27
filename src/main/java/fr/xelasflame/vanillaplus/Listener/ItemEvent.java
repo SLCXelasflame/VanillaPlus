@@ -1,5 +1,6 @@
 package fr.xelasflame.vanillaplus.Listener;
 
+import fr.xelasflame.vanillaplus.Gems;
 import fr.xelasflame.vanillaplus.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -13,10 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.*;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerItemHeldEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
@@ -26,10 +24,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDate;
+import java.util.*;
 
 
 public class ItemEvent implements Listener {
@@ -105,7 +101,7 @@ public class ItemEvent implements Listener {
             if (item == null || item.getType() == Material.AIR) {
                 return;
             }
-            if (item.getType() == Material.BUNDLE && item.hasItemMeta() && item.getItemMeta().hasCustomModelData() && item.getItemMeta().getCustomModelData() == 4) {
+            if (item.getType() == Material.BUNDLE && item.hasItemMeta() && item.getItemMeta().hasCustomModelData() && item.getItemMeta().getCustomModelData() <= 4) {
 
                 BundleMeta bundlemeta = (BundleMeta) item.getItemMeta();
                 bundlemeta.setItems(null);
@@ -116,10 +112,9 @@ public class ItemEvent implements Listener {
                     }
                     item.setItemMeta(bundlemeta);
                     player.getInventory().setItemInMainHand(item);
-                    ItemManager.applyGemEffect( player, inv);
-                    if(!player.getActivePotionEffects().isEmpty()) {
-                        player.sendMessage("§6§lUne étrange sensation te parcours le corp... Tu sens une puissance monter en toi...");
-                    }
+                    if(item.getItemMeta().getCustomModelData() == 4){ItemManager.applyGemEffect( player, inv);
+                       }
+
 
 
             }
@@ -151,24 +146,28 @@ public class ItemEvent implements Listener {
     @EventHandler
     public void onClose2(InventoryCloseEvent e){
         Player player = (Player) e.getPlayer();
-        boolean text = false;
-        if(e.getInventory().getHolder() instanceof Chest) {
-            for (ItemStack items : player.getInventory()) {
-                if (items.getType().equals(Material.BUNDLE) && items.getItemMeta().getCustomModelData() == 4) {
-                    ItemMeta meta = items.getItemMeta();
-                    BundleMeta bundleMeta = (BundleMeta) meta;
-                    Inventory inv = Bukkit.createInventory(player, 9 * meta.getCustomModelData(), meta.getDisplayName());
-                    for (ItemStack elt : bundleMeta.getItems()) {
-                        if (elt != null) {
-                            inv.addItem(elt);
+            for (ItemStack items : player.getInventory().getContents()) {
+                if(items != null) {
+                    if (items.getType().equals(Material.BUNDLE) && items.getItemMeta().getCustomModelData() == 4) {
+                        ItemMeta meta = items.getItemMeta();
+                        BundleMeta bundleMeta = (BundleMeta) meta;
+                        Inventory inv = Bukkit.createInventory(player, 9 * 4, meta.getDisplayName());
+                        for (ItemStack elt : bundleMeta.getItems()) {
+                            if (elt != null) {
+                                inv.addItem(elt);
+                            }
+                        }
+                        ItemManager.applyGemEffect(player, inv);
+                        break;
+                    }
+                    else{
+                        for(PotionEffectType effect : Gems.gems_effect) {
+                            player.removePotionEffect(effect);
                         }
                     }
-                    ItemManager.applyGemEffect(player, inv);
-                    break;
                 }
-
             }
-        }
+
     }
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
@@ -181,6 +180,16 @@ public class ItemEvent implements Listener {
 
             }
 
+        }
+    }
+
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event){
+        Player player = event.getPlayer();
+        LocalDate date = LocalDate.now();
+        if(date.getMonthValue() == 12 && date.getDayOfMonth() == 25){
+            Bukkit.getWorld(player.getWorld().getUID()).dropItem(player.getLocation(), ItemManager.chrismascup);
         }
     }
 

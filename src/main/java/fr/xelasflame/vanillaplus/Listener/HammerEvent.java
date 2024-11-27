@@ -3,6 +3,7 @@ package fr.xelasflame.vanillaplus.Listener;
 import fr.xelasflame.vanillaplus.ItemManager;
 import fr.xelasflame.vanillaplus.RecipeManager;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -16,6 +17,8 @@ import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Objects;
+
 
 public class HammerEvent implements Listener {
 
@@ -25,6 +28,27 @@ public class HammerEvent implements Listener {
         RecipeManager.updaterecipe(event.getPlayer());
 
     }
+
+    public static void breakBlock(Block block, Player player){
+        ItemStack item = player.getInventory().getItemInMainHand();
+        int drop = 0;
+        if(block.getType() != Material.BEDROCK || block.getType() != Material.BARRIER){
+        if(item.getEnchantments().containsKey(Enchantment.FORTUNE)){
+                drop+=item.getEnchantments().get(Enchantment.FORTUNE);
+            for(int i = 0; i < drop; i++){
+                for(ItemStack itemstack : block.getDrops()) {
+                    block.getWorld().dropItem(block.getLocation(), itemstack);
+                }
+            }
+        }
+        else if(item.getEnchantments().containsKey(Enchantment.SILK_TOUCH)){
+            block.getWorld().dropItem(player.getLocation(), new ItemStack(block.getType()));
+        }
+        else{
+            block.breakNaturally();
+        }
+        block.setType(Material.AIR);
+    }}
     @EventHandler
     public static void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
@@ -34,61 +58,60 @@ public class HammerEvent implements Listener {
                 BlockFace face = player.getTargetBlockFace(5);
                 Location loc = event.getBlock().getLocation();
                 World world = player.getWorld();
-                player.sendMessage("Face " + face.toString());
                 if (face == BlockFace.DOWN || face == BlockFace.UP) {
                     loc.setX(loc.getX() - 1);
                     loc.setZ(loc.getZ() - 1);
-                    world.getBlockAt(loc).breakNaturally(); //Bas Gauche
+                    breakBlock(world.getBlockAt(loc), player);//Bas Gauche
                     loc.setX(loc.getX() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Bas
+                    breakBlock(world.getBlockAt(loc), player); // Bas
                     loc.setX(loc.getX() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Bas Droite
+                    breakBlock(world.getBlockAt(loc), player); // Bas Droite
                     loc.setZ(loc.getZ() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Mid Droite
+                    breakBlock(world.getBlockAt(loc), player); // Mid Droite
                     loc.setZ(loc.getZ() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Haut Droite
+                    breakBlock(world.getBlockAt(loc), player); // Haut Droite
                     loc.setX(loc.getX() - 1);
-                    world.getBlockAt(loc).breakNaturally(); // Haut
+                    breakBlock(world.getBlockAt(loc), player); // Haut
                     loc.setX(loc.getX() - 1);
-                    world.getBlockAt(loc).breakNaturally(); //Haut Gauche
+                    breakBlock(world.getBlockAt(loc), player); //Haut Gauche
                     loc.setZ(loc.getZ() - 1);
-                    world.getBlockAt(loc).breakNaturally(); // Mid Gauche
+                    breakBlock(world.getBlockAt(loc), player); // Mid Gauche
                 } else if (face == BlockFace.EAST || face == BlockFace.WEST) {
                     loc.setY(loc.getY() - 1);
                     loc.setZ(loc.getZ() - 1);
-                    world.getBlockAt(loc).breakNaturally(); //Bas Gauche
+                    breakBlock(world.getBlockAt(loc), player); //Bas Gauche
                     loc.setZ(loc.getZ() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Bas
+                    breakBlock(world.getBlockAt(loc), player); // Bas
                     loc.setZ(loc.getZ() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Bas Droite
+                    breakBlock(world.getBlockAt(loc), player); // Bas Droite
                     loc.setY(loc.getY() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Mid Droite
+                    breakBlock(world.getBlockAt(loc), player); // Mid Droite
                     loc.setY(loc.getY() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Haut Droite
+                    breakBlock(world.getBlockAt(loc), player); // Haut Droite
                     loc.setZ(loc.getZ() - 1);
-                    world.getBlockAt(loc).breakNaturally(); // Haut
+                    breakBlock(world.getBlockAt(loc), player); // Haut
                     loc.setZ(loc.getZ() - 1);
-                    world.getBlockAt(loc).breakNaturally(); //Haut Gauche
+                    breakBlock(world.getBlockAt(loc), player); //Haut Gauche
                     loc.setY(loc.getY() - 1);
-                    world.getBlockAt(loc).breakNaturally(); // Mid Gauche
+                    breakBlock(world.getBlockAt(loc), player); // Mid Gauche
                 } else {
                     loc.setY(loc.getY() - 1);
                     loc.setX(loc.getX() - 1);
-                    world.getBlockAt(loc).breakNaturally(); //Bas Gauche
+                    breakBlock(world.getBlockAt(loc), player); //Bas Gauche
                     loc.setX(loc.getX() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Bas
+                    breakBlock(world.getBlockAt(loc), player); // Bas
                     loc.setX(loc.getX() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Bas Droite
+                    breakBlock(world.getBlockAt(loc), player); // Bas Droite
                     loc.setY(loc.getY() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Mid Droite
+                    breakBlock(world.getBlockAt(loc), player); // Mid Droite
                     loc.setY(loc.getY() + 1);
-                    world.getBlockAt(loc).breakNaturally(); // Haut Droite
+                    breakBlock(world.getBlockAt(loc), player); // Haut Droite
                     loc.setX(loc.getX() - 1);
-                    world.getBlockAt(loc).breakNaturally(); // Haut
+                    breakBlock(world.getBlockAt(loc), player); // Haut
                     loc.setX(loc.getX() - 1);
-                    world.getBlockAt(loc).breakNaturally(); //Haut Gauche
+                    breakBlock(world.getBlockAt(loc), player); //Haut Gauche
                     loc.setY(loc.getY() - 1);
-                    world.getBlockAt(loc).breakNaturally(); // Mid Gauche
+                    breakBlock(world.getBlockAt(loc), player); // Mid Gauche
                 }
 
             }

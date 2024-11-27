@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,6 +28,8 @@ public class ItemManager {
     public static ItemStack backpack3;
 
     public static ItemStack gembag;
+
+    public static ItemStack chrismascup;
 
     public static Gems mining_tear;
     public static Gems the_mask;
@@ -57,7 +60,7 @@ public class ItemManager {
         atlantide_gem = new Gems("Atlantide's Gem", ChatColor.DARK_AQUA, Collections.singletonList("Un trésor des plus intrigant aux ressourses inconnues"), PotionEffectType.WATER_BREATHING, 0);
         the_mask = new Gems( "The Mask", ChatColor.GREEN, Collections.singletonList("Un masque aux propriétés elastique semble vous murmurer à l'oreille"), PotionEffectType.JUMP_BOOST, 2);
 
-
+        createchrismasCup();
     }
 
 
@@ -162,6 +165,15 @@ public class ItemManager {
         gembag = item;
     }
 
+    private static void createchrismasCup(){
+        ItemStack item = new ItemStack(Material.STICK);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.RED + "Chrismas Cup : " + LocalDate.now().getYear());
+        meta.setCustomModelData(3);
+        item.setItemMeta(meta);
+        chrismascup = item;
+    }
+
     public static boolean isPickaxe(ItemStack item) {
         if (item == null || item.getType() == Material.AIR) {
             return false;
@@ -191,8 +203,4 @@ public class ItemManager {
             }
            }
     }
-
-
-
-
 }
