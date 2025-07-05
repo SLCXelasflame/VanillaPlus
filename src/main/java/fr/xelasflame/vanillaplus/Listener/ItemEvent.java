@@ -193,6 +193,46 @@ public class ItemEvent implements Listener {
         }
     }
 
+    @EventHandler
+    public void onEat(PlayerItemConsumeEvent e){
+        ItemStack item = e.getItem();
+        Player player = e.getPlayer();
+        if(item.getType().equals(Material.COOKIE) && item.hasItemMeta() && item.getItemMeta().hasCustomModelData()){
+            switch (item.getItemMeta().getCustomModelData()){
+                case 1:
+                    player.sendMessage("Tu sens le sucre te parcourir les veines... Seul ta chance pourra te sauver");
+                    switch ( (int)(Math.random() * 5)){
+                        case 0:
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 5*60*20, 1, true, false));
+                            break;
+                        case 1:
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP_BOOST, 5*60*20, 1, true, false));
+                            break;
+                        case 2:
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.HASTE, 5*60*20, 1, true, false));
+                            break;
+                        case 3:
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 5*60*20, 1, true, false));
+                            break;
+                        case 4:
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 5*60*20, 1, true, false));
+                            break;
+                        case 5:
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.MINING_FATIGUE, 5*60*20, 1, true, false));
+                            break;
+                        case 6:
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 5*60*20, 1, true, false));
+                            break;
+                        case 7:
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 5*60*20, 5, true, false));
+                            break;
 
+
+                    }
+                    break;
+
+            }
+        }
+    }
 
     }

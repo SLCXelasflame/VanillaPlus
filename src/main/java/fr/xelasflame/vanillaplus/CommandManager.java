@@ -92,7 +92,12 @@ public class CommandManager implements CommandExecutor {
                         case "pegasus_feather":
                             player.getInventory().addItem(ItemManager.pegasus_feather.getItem());
                             break;
-
+                        case "candy":
+                            player.getInventory().addItem(ItemManager.candy);
+                            break;
+                        case "xmashat":
+                            player.getInventory().addItem(ItemManager.xmashat);
+                            break;
                         default:
                             player.sendMessage("Erreur dans le nom de l'item");
                             break;

@@ -1,7 +1,11 @@
 package fr.xelasflame.vanillaplus;
 
+import jdk.dynalink.Operation;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -30,6 +34,8 @@ public class ItemManager {
     public static ItemStack gembag;
 
     public static ItemStack chrismascup;
+    public static ItemStack candy;
+    public static ItemStack xmashat;
 
     public static Gems mining_tear;
     public static Gems the_mask;
@@ -61,6 +67,8 @@ public class ItemManager {
         the_mask = new Gems( "The Mask", ChatColor.GREEN, Collections.singletonList("Un masque aux propriétés elastique semble vous murmurer à l'oreille"), PotionEffectType.JUMP_BOOST, 2);
 
         createchrismasCup();
+        createcandy();
+        createXmasHat();
     }
 
 
@@ -202,5 +210,32 @@ public class ItemManager {
                 gems.setPotion(player);
             }
            }
+    }
+
+    public static void createcandy(){
+        ItemStack item = new ItemStack(Material.COOKIE, 5);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.RED + "Candy");
+        meta.setCustomModelData(1);
+        List<String> lore = new ArrayList<>();
+        lore.add("Un excès de sucre est si vite arrivé.");
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        candy = item;
+    }
+
+    public static void createXmasHat(){
+        ItemStack item = new ItemStack(Material.DIAMOND_HELMET);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(ChatColor.RED + "Xmas Hat");
+        meta.setCustomModelData(1);
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(NamespacedKey.minecraft("xmas_generic_armor"), 5, AttributeModifier.Operation.ADD_NUMBER));
+        meta.setUnbreakable(true);
+        List<String> lore = new ArrayList<>();
+        lore.add("Un chapeau soyeux et de bonne fabrique aux propriétés indescriptibles");
+        meta.setLore(lore);
+        item.setItemMeta(meta);
+        xmashat = item;
+
     }
 }

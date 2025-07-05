@@ -29,6 +29,8 @@ public static void init(){
     recipeatlantide_gem();
     recipethe_mask();
 
+    recipecandy();
+    recipexmashat();
 }
 
     private static void recipeironhammer(){
@@ -190,6 +192,25 @@ public static void init(){
         Bukkit.addRecipe(the_mask);
     }
 
+    private  static void recipecandy(){
+        ShapedRecipe candy = new ShapedRecipe(NamespacedKey.minecraft("candy"), ItemManager.candy);
+        candy.shape("XBX", "CDC", "XBX");
+        candy.setIngredient('B', Material.SUGAR);
+        candy.setIngredient('C', Material.RED_DYE);
+        candy.setIngredient('D', Material.APPLE);
+        Bukkit.addRecipe(candy);
+    }
+
+    private static void recipexmashat(){
+        ShapedRecipe xmashat = new ShapedRecipe(NamespacedKey.minecraft("xmashat"), ItemManager.xmashat);
+        xmashat.shape("ABA", "CDC", "ABA");
+        xmashat.setIngredient('A', ItemManager.candy);
+        xmashat.setIngredient('B', Material.RED_WOOL);
+        xmashat.setIngredient('C', Material.GOLD_INGOT);
+        xmashat.setIngredient('D', Material.DIAMOND_HELMET);
+        Bukkit.addRecipe(xmashat);
+    }
+
 
 
 
@@ -213,8 +234,12 @@ public static void init(){
         player.discoverRecipe(NamespacedKey.minecraft("the_mask"));
         player.discoverRecipe(NamespacedKey.minecraft("pegasus_feather"));
 
+        player.discoverRecipe(NamespacedKey.minecraft("candy"));
+        player.discoverRecipe(NamespacedKey.minecraft("xmashat"));
 
     }
+
+
 
 
 }
